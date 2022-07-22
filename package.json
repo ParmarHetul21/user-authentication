@@ -1,0 +1,40 @@
+{
+	"name": "user-authentication",
+	"version": "1.0.0",
+	"description": "The boiler plate login code for NodeJS with JWT",
+	"main": "src/server.js",
+	"type": "module",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "nodemon server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ParmarHetul21/user-authentication.git"
+	},
+	"author": "https://github.com/ParmarHetul21",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ParmarHetul21/user-authentication/issues"
+	},
+	"homepage": "https://github.com/ParmarHetul21/user-authentication#readme",
+	"devDependencies": {
+		"eslint": "^8.20.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-plugin-import": "^2.26.0"
+	},
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.20.0",
+		"cors": "^2.8.5",
+		"dotenv": "^16.0.1",
+		"express": "^4.18.1",
+		"joi": "^17.6.0",
+		"mongoose": "^6.4.5",
+		"morgan": "^1.10.0",
+		"nodemon": "^2.0.19",
+		"passport": "^0.6.0",
+		"passport-jwt": "^4.0.0",
+		"validator": "^13.7.0"
+	}
+}
