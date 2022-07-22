@@ -2,7 +2,7 @@
 
 UAT is a project which is used for integrating in any node project. It has all the user API's with swagger and proper authentication using passport.
 
-[localhost](http://localhost:3000/)
+[localhost Server](http://localhost:3000/)
 
 My main inspiration for this project was that, whenever some developer start the project, they start with the user authntication, it takes time,So saving the time and buidling the project as soon as possible.
 
