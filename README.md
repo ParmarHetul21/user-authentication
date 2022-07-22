@@ -24,9 +24,9 @@ Other related and helpful libraries are used in the project for smooth developme
 
 ## Folder Structure (src/)
 
-| Directory | Description                                                |
-| --------- | ---------------------------------------------------------- |
-| `/users`  | User related logic (e.g. Login, User Profile, Wallet etc.) |
+| Directory | Description                                                  |
+| --------- | ------------------------------------------------------------ |
+| `/users`  | User related logic (e.g. Login, User Profile, Register etc.) |
 
 ### Requirements
 
