@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema({
 		required: true
 	},
 	joinDate: {
-		type: Date,
+		type: String,
 		default: Date.now()
 	},
 	password: {

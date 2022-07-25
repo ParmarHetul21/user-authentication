@@ -8,15 +8,23 @@ const options = {
 	useUnifiedTopology: true
 };
 
-mongoose.connect(URL, options, (err) => {
-	if (err) {
-		console.log(err.stack);
-	} else {
-		mongoose.connection.on("connected", () => {});
-		mongoose.connection.on("error", (err) => console.log("error:", err));
-		mongoose.connection.on("disconnected", () =>
-			console.log("disconnected")
-		);
-		console.log("** Database Connected **");
+export const connection = () => {
+	try {
+		mongoose.connect(URL, options, (err) => {
+			if (err) {
+				console.log(err.message);
+			} else {
+				mongoose.connection.on("connected", () => {});
+				mongoose.connection.on("error", (err) =>
+					console.log("error:", err.message)
+				);
+				mongoose.connection.on("disconnected", () =>
+					console.log("disconnected")
+				);
+				console.log("** Database Connected **");
+			}
+		});
+	} catch (error) {
+		console.log("sdasd" + error.stack);
 	}
-});
+};

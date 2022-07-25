@@ -1,6 +1,0 @@
-{
-	"yaml.schemas": {
-		"file:///Users/hetulparmar/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
-		"swaggerviewer:openapi": "file:///Users/hetulparmar/Downloads/document.yaml"
-	}
-}

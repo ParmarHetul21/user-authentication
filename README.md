@@ -50,7 +50,7 @@ You can configure the database connection in `db.js` file in `src/config` folder
 
 ### Commands
 
-```bash
+```terminal
 # install dependencies for backend
 $ npm install
 

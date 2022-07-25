@@ -5,8 +5,7 @@ export const resgiterScehma = Joi.object({
 	email: Joi.string().email().required(),
 	gender: Joi.string().required(),
 	joinDate: Joi.string().required(),
-	password: Joi.string().required(),
-	userImage: Joi.string().required()
+	password: Joi.string().required()
 });
 
 export const loginSchema = Joi.object({
