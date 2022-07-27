@@ -1,4 +1,4 @@
-import StatusCodes from "./statusCode.js";
+import StatusCodes from "./statuscode.common.js";
 
 const createResponse = (statusCode, data) => {
 	const success = statusCode < StatusCodes.BAD_REQUEST;

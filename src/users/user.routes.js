@@ -1,18 +1,25 @@
 import { Router } from "express";
-import { registerHandler } from "./user.handlers.js";
-// import { checkBody } from "../middleware/checkbody.validation.js";
-import uploadImage from "../utils/ImageUpload.js";
-import { checkBody } from "../middleware/checkbody.validation.js";
-import { checkImageExists } from "../middleware/checkImage.validation.js";
+import handlers from "./user.handlers.js";
+import { upload } from "../utils/image.utils.js";
+import middleware from "../middleware/checkBody.middleware.js";
+import { loginSchema, resgiterScehma } from "./user.validations.js";
 
 const userRouter = Router();
 
 userRouter.post(
 	"/register",
-	uploadImage.single("userImage"),
-	checkImageExists,
-	checkBody,
-	registerHandler
+	[
+		upload.single("userImage"),
+		middleware.checkImageExists,
+		middleware.validBody(resgiterScehma)
+	],
+	handlers.registerHandler
+);
+
+userRouter.post(
+	"/login",
+	middleware.validBody(loginSchema),
+	handlers.loginHandler
 );
 
 export default userRouter;

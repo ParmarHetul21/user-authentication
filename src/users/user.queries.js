@@ -5,7 +5,12 @@ const { PBKDF2 } = cryptojs;
 
 const fetchUserByEmail = async (email) => {
 	try {
-		const user = User.findOne({ email: email });
+		const user = User.findOne({ email: email })
+			.select({
+				__v: 0,
+				_id: 0
+			})
+			.lean();
 		return user;
 	} catch (error) {
 		console.log(error);
