@@ -116,12 +116,34 @@ const fetchAllUser = async () => {
 	}
 };
 
+const changePasscode = async (id, newPassword) => {
+	const userData = await Queries.fetchUserById(id);
+	if (!userData) {
+		return Response.createResponse(StatusCodes.NOT_FOUND, {
+			message: statusMessages.NOT_FOUND
+		});
+	}
+
+	const encrypted = PBKDF2(newPassword, userData.email, ENC_KEY);
+	const updatedPassword = await Queries.changePassword(id, encrypted);
+	if (!updatedPassword) {
+		return Response.createResponse(StatusCodes.BAD_REQUEST, {
+			message: statusMessages.BAD_REQUEST
+		});
+	}
+
+	return Response.createResponse(StatusCodes.OK, {
+		message: statusMessages.OK
+	});
+};
+
 const Services = {
 	createUser,
 	loginuser,
 	getUserById,
 	deleteUser,
-	fetchAllUser
+	fetchAllUser,
+	changePasscode
 };
 
 export default Services;

@@ -52,12 +52,20 @@ const fetchAllUser = async () => {
 	return allUser;
 };
 
+const changePassword = async (id, newPassword) => {
+	const userDetails = await User.findByIdAndUpdate(id, {
+		password: newPassword
+	}).lean();
+	return userDetails;
+};
+
 const Queries = {
 	fetchUserByEmail,
 	createUser,
 	fetchUserById,
 	deleteUserById,
-	fetchAllUser
+	fetchAllUser,
+	changePassword
 };
 
 export default Queries;
