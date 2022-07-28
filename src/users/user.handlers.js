@@ -38,16 +38,20 @@ const forgotPassword = async (req, res) => {
 };
 
 const verfiyEmailWithMail = async (req, res) => {
-	const { info, passcode } = await sentEmail(req.body.email);
-	console.log(info, passcode);
-	if (!info || !passcode) {
-		res.status(StatusCodes.BAD_REQUEST).json({
-			message: statusMessages.BAD_REQUEST
+	try {
+		const { info, newPasscode } = await sentEmail(req.body.email);
+		console.log(info, newPasscode);
+		if (!info || !newPasscode) {
+			res.status(StatusCodes.BAD_REQUEST).json({
+				message: statusMessages.BAD_REQUEST
+			});
+		}
+		res.status(StatusCodes.OK).json({
+			message: statusMessages.OK
 		});
+	} catch (error) {
+		console.log(error);
 	}
-	res.status(StatusCodes.OK).json({
-		message: statusMessages.OK
-	});
 };
 
 const handlers = {

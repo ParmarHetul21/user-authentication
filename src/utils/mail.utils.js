@@ -1,17 +1,14 @@
 import nodemailer from "nodemailer";
-import { username, password } from "../config/env.js";
 
 export const sentEmail = async (email) => {
 	try {
-		const NUMBER_DIGITS = 4;
-		const newPasscode = Math.random(NUMBER_DIGITS);
+		const newPasscode = 2111;
 		const tranpoter = nodemailer.createTransport({
-			host: "smtp.ethereal.email",
-			port: 587,
-			secure: false,
+			host: "smtp.mailtrap.io",
+			port: 2525,
 			auth: {
-				user: username,
-				pass: password
+				user: "3736b3c5d8818b",
+				pass: "35a699ce7fcc1d"
 			}
 		});
 
