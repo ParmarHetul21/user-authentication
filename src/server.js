@@ -9,6 +9,7 @@ import StatusCodes from "./common/statuscode.common.js";
 import fs from "fs";
 
 const app = express();
+
 const swaggerDoc = JSON.parse(fs.readFileSync("./openapi.json", "utf8"));
 
 app.use(bodyParser.urlencoded({ extended: false }));

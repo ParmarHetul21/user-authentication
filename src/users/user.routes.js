@@ -15,11 +15,17 @@ userRouter.post(
 	],
 	handlers.registerHandler
 );
-
 userRouter.post(
 	"/login",
 	middleware.validBody(loginSchema),
 	handlers.loginHandler
 );
+userRouter.get("/:id", middleware.validateObjectId, handlers.fetchUser);
+userRouter.delete(
+	"/delete/:id",
+	middleware.validateObjectId,
+	handlers.deleteUser
+);
+userRouter.get("/list/all", handlers.fetchUsers);
 
 export default userRouter;

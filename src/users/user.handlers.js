@@ -11,9 +11,27 @@ const loginHandler = async (req, res) => {
 	res.status(statusCode).json(response);
 };
 
+const fetchUser = async (req, res) => {
+	const { statusCode, response } = await Services.getUserById(req.params.id);
+	return res.status(statusCode).json(response);
+};
+
+const deleteUser = async (req, res) => {
+	const { statusCode, response } = await Services.deleteUser(req.params.id);
+	return res.status(statusCode).json(response);
+};
+
+const fetchUsers = async (req, res) => {
+	const { statusCode, response } = await Services.fetchAllUser();
+	return res.status(statusCode).json(response);
+};
+
 const handlers = {
 	registerHandler,
-	loginHandler
+	loginHandler,
+	fetchUser,
+	deleteUser,
+	fetchUsers
 };
 
 export default handlers;

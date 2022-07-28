@@ -271,7 +271,7 @@
 									"properties": {
 										"success": {
 											"type": "boolean",
-											"default": false
+											"default": true
 										},
 										"data": {
 											"type": "object",
@@ -339,7 +339,7 @@
 									"properties": {
 										"success": {
 											"type": "boolean",
-											"default": false
+											"default": true
 										},
 										"data": {
 											"type": "object",
@@ -366,6 +366,184 @@
 										"jwtToken": {
 											"type": "string",
 											"nullable": false
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"$ref": "#/components/responses/400"
+					},
+					"404": {
+						"$ref": "#/components/responses/404"
+					},
+					"401": {
+						"$ref": "#/components/responses/401"
+					}
+				}
+			}
+		},
+		"/user/{userId}": {
+			"get": {
+				"description": "get all user details",
+				"tags": ["user"],
+				"parameters": [
+					{
+						"in": "path",
+						"required": true,
+						"name": "userId",
+						"schema": {
+							"type": "string"
+						},
+						"description": "mongoDb Object Id"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "fetched users by Id",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"additionalProperties": false,
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"default": true
+										},
+										"data": {
+											"type": "object",
+											"additionalProperties": false,
+											"properties": {
+												"fullName": {
+													"type": "string",
+													"nullable": false
+												},
+												"email": {
+													"type": "string",
+													"nullable": false
+												},
+												"joinDate": {
+													"type": "string",
+													"nullable": false
+												},
+												"userImage": {
+													"type": "string",
+													"nullable": false
+												}
+											}
+										},
+										"message": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"$ref": "#/components/responses/400"
+					},
+					"404": {
+						"$ref": "#/components/responses/404"
+					},
+					"401": {
+						"$ref": "#/components/responses/401"
+					}
+				}
+			}
+		},
+		"/user/delete/{userId}": {
+			"delete": {
+				"description": "delete single user",
+				"tags": ["user"],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"schema": {
+							"type": "string",
+							"nullable": false
+						},
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "user deleted succesfuly",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"default": true
+										},
+										"message": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"$ref": "#/components/responses/400"
+					},
+					"404": {
+						"$ref": "#/components/responses/404"
+					},
+					"401": {
+						"$ref": "#/components/responses/401"
+					}
+				}
+			}
+		},
+		"/user/list/all": {
+			"get": {
+				"description": "fetch All users",
+				"tags": ["user"],
+				"responses": {
+					"200": {
+						"description": "fetch all the users",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"default": true
+										},
+										"user": {
+											"type": "object",
+											"properties": {
+												"FullName": {
+													"type": "string",
+													"nullable": false
+												},
+												"email": {
+													"type": "string",
+													"nullable": false
+												},
+												"gender": {
+													"type": "string",
+													"nullable": false
+												},
+												"joinDate": {
+													"type": "string",
+													"nullable": false
+												},
+												"userImage": {
+													"type": "string",
+													"nullable": false
+												}
+											}
+										},
+										"message": {
+											"type": "string"
 										}
 									}
 								}
