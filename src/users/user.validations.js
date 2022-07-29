@@ -1,5 +1,7 @@
 import Joi from "joi";
 
+const MAX_NUM = 4;
+
 export const resgiterScehma = Joi.object({
 	fullName: Joi.string().required(),
 	email: Joi.string().email().required(),
@@ -15,4 +17,12 @@ export const loginSchema = Joi.object({
 
 export const emailSchemas = Joi.object({
 	email: Joi.string().email().required()
+});
+
+export const otpSchema = Joi.object({
+	otp: Joi.number().max(MAX_NUM).required()
+});
+
+export const passwordSchema = Joi.object({
+	password: Joi.string().required()
 });

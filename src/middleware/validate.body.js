@@ -72,6 +72,9 @@ const validateObjectId = (req, res, next) => {
 const checkPasscode = (req, res, next) => {
 	try {
 		const password = req.body.password;
+		const otp = req.body.otp;
+
+		
 		if (!password) {
 			res.status(StatusCodes.BAD_REQUEST).json({
 				success: false,

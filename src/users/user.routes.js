@@ -1,12 +1,15 @@
 import { Router } from "express";
 import handlers from "./user.handlers.js";
 import { upload } from "../utils/image.utils.js";
-import middleware from "../middleware/checkBody.middleware.js";
+import middleware from "../middleware/validate.body.js";
 import {
 	emailSchemas,
 	loginSchema,
+	otpSchema,
+	passwordSchema,
 	resgiterScehma
 } from "./user.validations.js";
+import { isAuthorized } from "../middleware/auth.js";
 
 const userRouter = Router();
 
@@ -24,24 +27,30 @@ userRouter.post(
 	middleware.validBody(loginSchema),
 	handlers.loginHandler
 );
-userRouter.get("/:id", middleware.validateObjectId, handlers.fetchUserHandler);
+userRouter.get(
+	"/:id",
+	isAuthorized,
+	middleware.validateObjectId,
+	handlers.fetchUserHandler
+);
 userRouter.delete(
 	"/delete/:id",
+	isAuthorized,
 	middleware.validateObjectId,
 	handlers.deleteUserHandler
 );
-userRouter.get("/list/all", handlers.fetchUsersHandler);
+userRouter.get("/list/all", isAuthorized, handlers.fetchUsersHandler);
 userRouter.get(
 	"/validate/:email",
+	isAuthorized,
 	middleware.validParams(emailSchemas),
 	handlers.verfiyEmailWithMailHandler
 );
-
-// userRouter.post(
-// 	"/forgot-password",
-// 	middleware.validateObjectId,
-// 	middleware.checkPasscode,
-// 	handlers.forgotPassword
-// );
+userRouter.post(
+	"/forgot-password",
+	middleware.validBody(passwordSchema),
+	middleware.validBody(otpSchema),
+	handlers.forgotPasswordHandler
+);
 
 export default userRouter;

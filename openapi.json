@@ -394,6 +394,7 @@
 			"get": {
 				"description": "get all user details",
 				"tags": ["user"],
+				"security": [{ "bearerAuth": [] }],
 				"parameters": [
 					{
 						"in": "path",
@@ -402,7 +403,7 @@
 						"schema": {
 							"type": "string"
 						},
-						"description": "mongoDb Object Id"
+						"description": "Id"
 					}
 				],
 				"responses": {
@@ -464,6 +465,7 @@
 			"delete": {
 				"description": "delete single user",
 				"tags": ["user"],
+				"security": [{ "bearerAuth": [] }],
 				"parameters": [
 					{
 						"in": "path",
@@ -511,6 +513,7 @@
 			"get": {
 				"description": "fetch All users",
 				"tags": ["user"],
+				"security": [{ "bearerAuth": [] }],
 				"responses": {
 					"200": {
 						"description": "fetch all the users",
@@ -572,6 +575,7 @@
 			"get": {
 				"description": "validate the email",
 				"tags": ["user"],
+				"security": [{ "bearerAuth": [] }],
 				"parameters": [
 					{
 						"in": "path",
