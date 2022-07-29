@@ -19,6 +19,23 @@ const validBody = (schema) => (req, res, next) => {
 	}
 };
 
+const validParams = (schema) => (req, res, next) => {
+	try {
+		const valid = schema.validate(req.params);
+		if (valid.error) {
+			res.status(StatusCodes.BAD_REQUEST).json({
+				success: false,
+				message: statusMessages.BAD_REQUEST,
+				error: valid.error.message
+			});
+		} else {
+			next();
+		}
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 const checkImageExists = (req, res, next) => {
 	try {
 		if (!req.file) {
@@ -73,7 +90,8 @@ const middleware = {
 	checkImageExists,
 	validBody,
 	validateObjectId,
-	checkPasscode
+	checkPasscode,
+	validParams
 };
 
 export default middleware;

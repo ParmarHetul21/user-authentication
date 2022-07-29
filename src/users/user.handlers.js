@@ -27,7 +27,9 @@ const fetchUsersHandler = async (req, res) => {
 };
 
 const verfiyEmailWithMailHandler = async (req, res) => {
-	const { statusCode, response } = await Services.verifyMail(req.body.email);
+	const { statusCode, response } = await Services.verifyMail(
+		req.params.email
+	);
 	return res.status(statusCode).json(response);
 };
 

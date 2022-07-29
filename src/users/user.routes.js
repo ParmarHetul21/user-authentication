@@ -3,9 +3,9 @@ import handlers from "./user.handlers.js";
 import { upload } from "../utils/image.utils.js";
 import middleware from "../middleware/checkBody.middleware.js";
 import {
+	emailSchemas,
 	loginSchema,
-	resgiterScehma,
-	emailSchemas
+	resgiterScehma
 } from "./user.validations.js";
 
 const userRouter = Router();
@@ -32,8 +32,8 @@ userRouter.delete(
 );
 userRouter.get("/list/all", handlers.fetchUsersHandler);
 userRouter.get(
-	"/validate/email",
-	middleware.validBody(emailSchemas),
+	"/validate/:email",
+	middleware.validParams(emailSchemas),
 	handlers.verfiyEmailWithMailHandler
 );
 

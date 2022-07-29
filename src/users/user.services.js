@@ -128,7 +128,6 @@ const verifyMail = async (email) => {
 	}
 
 	const response = await sentEmail(email);
-	console.log(response);
 	if (!response.info) {
 		return Response.createResponse(StatusCodes.EXPECTATION_FAILED, {
 			message: statusMessages.EXPECTATION_FAILED,

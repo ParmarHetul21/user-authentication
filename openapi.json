@@ -71,6 +71,12 @@
 						"description": "Image of the User",
 						"nullable": false,
 						"type": "string"
+					},
+					"passcode": {
+						"example": "2121",
+						"maxLength": 4,
+						"nullable": false,
+						"type": "number"
 					}
 				}
 			}
@@ -562,28 +568,22 @@
 				}
 			}
 		},
-		"/user/validate/email": {
+		"/user/validate/{email}": {
 			"get": {
 				"description": "validate the email",
 				"tags": ["user"],
-				"requestBody": {
-					"description": "email validate body",
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"type": "object",
-								"properties": {
-									"email": {
-										"type": "string",
-										"nullable": false,
-										"format": "email"
-									}
-								}
-							}
-						}
+				"parameters": [
+					{
+						"in": "path",
+						"name": "email",
+						"schema": {
+							"type": "string",
+							"format": "email",
+							"nullable": false
+						},
+						"required": true
 					}
-				},
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
