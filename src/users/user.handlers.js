@@ -11,22 +11,27 @@ const loginHandler = async (req, res) => {
 	res.status(statusCode).json(response);
 };
 
-const fetchUser = async (req, res) => {
+const fetchUserHandler = async (req, res) => {
 	const { statusCode, response } = await Services.getUserById(req.params.id);
 	return res.status(statusCode).json(response);
 };
 
-const deleteUser = async (req, res) => {
+const deleteUserHandler = async (req, res) => {
 	const { statusCode, response } = await Services.deleteUser(req.params.id);
 	return res.status(statusCode).json(response);
 };
 
-const fetchUsers = async (req, res) => {
+const fetchUsersHandler = async (req, res) => {
 	const { statusCode, response } = await Services.fetchAllUser();
 	return res.status(statusCode).json(response);
 };
 
-const forgotPassword = async (req, res) => {
+const verfiyEmailWithMailHandler = async (req, res) => {
+	const { statusCode, response } = await Services.verifyMail(req.body.email);
+	return res.status(statusCode).json(response);
+};
+
+const forgotPasswordHandler = async (req, res) => {
 	const { statusCode, response } = await Services.changePasscode(
 		req.params.id,
 		req.body.password
@@ -34,25 +39,14 @@ const forgotPassword = async (req, res) => {
 	return res.status(statusCode).json(response);
 };
 
-const verfiyEmailWithMail = async (req, res) => {
-	try {
-		const { statusCode, response } = await Services.verifyMail(
-			req.body.email
-		);
-		return res.status(statusCode).json(response);
-	} catch (error) {
-		console.log(error);
-	}
-};
-
 const handlers = {
 	registerHandler,
 	loginHandler,
-	fetchUser,
-	deleteUser,
-	fetchUsers,
-	forgotPassword,
-	verfiyEmailWithMail
+	fetchUserHandler,
+	deleteUserHandler,
+	fetchUsersHandler,
+	forgotPasswordHandler,
+	verfiyEmailWithMailHandler
 };
 
 export default handlers;

@@ -24,17 +24,17 @@ userRouter.post(
 	middleware.validBody(loginSchema),
 	handlers.loginHandler
 );
-userRouter.get("/:id", middleware.validateObjectId, handlers.fetchUser);
+userRouter.get("/:id", middleware.validateObjectId, handlers.fetchUserHandler);
 userRouter.delete(
 	"/delete/:id",
 	middleware.validateObjectId,
-	handlers.deleteUser
+	handlers.deleteUserHandler
 );
-userRouter.get("/list/all", handlers.fetchUsers);
+userRouter.get("/list/all", handlers.fetchUsersHandler);
 userRouter.get(
 	"/validate/email",
 	middleware.validBody(emailSchemas),
-	handlers.verfiyEmailWithMail
+	handlers.verfiyEmailWithMailHandler
 );
 
 // userRouter.post(
