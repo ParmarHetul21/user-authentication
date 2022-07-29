@@ -2,7 +2,7 @@
 
 UAT is a project which is used for integrating in any node project. It has all the user API's with swagger and proper authentication using passport.
 
-[localhost Server](http://localhost:3000/)
+<!-- [localhost Server](http://localhost:3000/) -->
 
 My main inspiration for this project was that, whenever some developer start the project, they start with the user authntication, it takes time,So saving the time and buidling the project as soon as possible.
 
@@ -16,9 +16,7 @@ Also, I decided to bring together all my learnings into one place and analyze ho
 -   Express.js
 -   MongoDB
 -   Mongoose
--   Passport-jwt
--   bcrypt-js
--   passport-js
+-   crypto-js
 
 Other related and helpful libraries are used in the project for smooth development.
 
@@ -44,6 +42,7 @@ MONGO_PASSWORD=mongopassword
 PORT=PORT
 MONGO_URL=MONGO_URL
 JWT_SECRET=JWT_SECRET
+ENC_CRYPT=ENC_CRYPT
 ```
 
 You can configure the database connection in `db.js` file in `src/config` folder.
@@ -55,5 +54,5 @@ You can configure the database connection in `db.js` file in `src/config` folder
 $ npm install
 
 # run backend
-$ npm run dev
+$ npm start
 ```
