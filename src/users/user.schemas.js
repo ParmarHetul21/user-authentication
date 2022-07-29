@@ -25,6 +25,11 @@ const userSchema = mongoose.Schema({
 		type: String,
 		default:
 			"https://res.cloudinary.com/dzujgoodl/image/upload/v1620985191/default-profile-image_gy7rls.png"
+	},
+	passcode: {
+		type: Number,
+		length: 4,
+		default: 1234
 	}
 });
 

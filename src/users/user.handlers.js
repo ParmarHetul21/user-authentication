@@ -1,7 +1,4 @@
 import Services from "./user.services.js";
-import { sentEmail } from "../utils/mail.utils.js";
-import StatusCodes from "../common/statuscode.common.js";
-import statusMessages from "../common/statustext.common.js";
 
 const registerHandler = async (req, res) => {
 	const data = { ...req.body, userImage: req.file.path };
@@ -39,16 +36,10 @@ const forgotPassword = async (req, res) => {
 
 const verfiyEmailWithMail = async (req, res) => {
 	try {
-		const { info, newPasscode } = await sentEmail(req.body.email);
-		console.log(info, newPasscode);
-		if (!info || !newPasscode) {
-			res.status(StatusCodes.BAD_REQUEST).json({
-				message: statusMessages.BAD_REQUEST
-			});
-		}
-		res.status(StatusCodes.OK).json({
-			message: statusMessages.OK
-		});
+		const { statusCode, response } = await Services.verifyMail(
+			req.body.email
+		);
+		return res.status(statusCode).json(response);
 	} catch (error) {
 		console.log(error);
 	}

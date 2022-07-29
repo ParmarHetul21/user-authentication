@@ -561,6 +561,7 @@
 					}
 				}
 			}
-		}
+		},
+		"/user/validate/email": {}
 	}
 }

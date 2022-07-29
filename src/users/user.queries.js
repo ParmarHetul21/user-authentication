@@ -47,7 +47,9 @@ const deleteUserById = async (id) => {
 
 const fetchAllUser = async () => {
 	const allUser = await User.find().select({
-		__v: 0
+		__v: 0,
+		passcode: 0,
+		password: 0
 	});
 	return allUser;
 };
@@ -59,13 +61,21 @@ const changePassword = async (id, newPassword) => {
 	return userDetails;
 };
 
+const updatePasscode = async (id, passcode) => {
+	const userDetails = await User.findByIdAndUpdate(id, {
+		passcode: passcode
+	});
+	return userDetails;
+};
+
 const Queries = {
 	fetchUserByEmail,
 	createUser,
 	fetchUserById,
 	deleteUserById,
 	fetchAllUser,
-	changePassword
+	changePassword,
+	updatePasscode
 };
 
 export default Queries;

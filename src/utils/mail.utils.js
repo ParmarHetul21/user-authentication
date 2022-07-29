@@ -2,8 +2,12 @@ import nodemailer from "nodemailer";
 
 export const sentEmail = async (email) => {
 	try {
-		const newPasscode = 2111;
-		const tranpoter = nodemailer.createTransport({
+		const thousands = 1000;
+		const randomPasscode = Math.floor(
+			thousands + Math.random() * thousands
+		);
+
+		const transport = nodemailer.createTransport({
 			host: "smtp.mailtrap.io",
 			port: 2525,
 			auth: {
@@ -12,14 +16,15 @@ export const sentEmail = async (email) => {
 			}
 		});
 
-		const info = await tranpoter.sendMail({
+		const info = await transport.sendMail({
 			from: "hetul.d.parmar.20@gmail.com",
 			to: email,
-			subject: "Your New Passcode Request",
-			html: `<b>Your New Passcode is : ${newPasscode} </b>`
+			subject: "Passcode to Validate Email",
+			text: "Your Passcode From GrumpySoul Corp. is :- " + randomPasscode
 		});
 
-		return { info, newPasscode };
+		const response = { info, randomPasscode };
+		return response;
 	} catch (error) {
 		console.log(error);
 	}

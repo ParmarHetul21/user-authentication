@@ -5,6 +5,7 @@ import StatusCodes from "../common/statuscode.common.js";
 import jwt from "jsonwebtoken";
 import statusMessages from "../common/statustext.common.js";
 import cryptojs from "crypto-js";
+import { sentEmail } from "../utils/mail.utils.js";
 const { PBKDF2 } = cryptojs;
 
 const createUser = async (data) => {
@@ -102,11 +103,13 @@ const deleteUser = async (id) => {
 const fetchAllUser = async () => {
 	try {
 		const fetchUser = await Queries.fetchAllUser();
-		if (!fetchUser) {
+
+		if (!fetchUser.length) {
 			return Response.createResponse(StatusCodes.NOT_FOUND, {
 				message: statusMessages.NOT_FOUND
 			});
 		}
+
 		return Response.createResponse(StatusCodes.OK, {
 			user: fetchUser,
 			message: statusMessages.OK
@@ -114,6 +117,38 @@ const fetchAllUser = async () => {
 	} catch (error) {
 		console.log(error);
 	}
+};
+
+const verifyMail = async (email) => {
+	const user = await Queries.fetchUserByEmail(email);
+	if (!user) {
+		return Response.createResponse(StatusCodes.NOT_FOUND, {
+			message: statusMessages.NOT_FOUND
+		});
+	}
+
+	const response = await sentEmail(email);
+	console.log(response);
+	if (!response.info) {
+		return Response.createResponse(StatusCodes.EXPECTATION_FAILED, {
+			message: statusMessages.EXPECTATION_FAILED,
+			error: response.info
+		});
+	}
+
+	const updatedPasscode = await Queries.updatePasscode(
+		user._id,
+		response.randomPasscode
+	);
+	if (!updatedPasscode) {
+		return Response.createResponse(StatusCodes.NOT_FOUND, {
+			message: statusMessages.NOT_FOUND
+		});
+	}
+	return Response.createResponse(StatusCodes.OK, {
+		message: statusMessages.OK,
+		passcode: response.randomPasscode
+	});
 };
 
 const changePasscode = async (id, newPassword) => {
@@ -143,7 +178,8 @@ const Services = {
 	getUserById,
 	deleteUser,
 	fetchAllUser,
-	changePasscode
+	changePasscode,
+	verifyMail
 };
 
 export default Services;
