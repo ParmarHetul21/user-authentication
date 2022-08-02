@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import statusMessages from "../common/statustext.common.js";
 import cryptojs from "crypto-js";
 import { sentEmail } from "../utils/mail.utils.js";
-const { PBKDF2 } = cryptojs;
+const crypto = cryptojs;
 
 const createUser = async (data) => {
 	try {
@@ -41,7 +41,7 @@ const loginuser = async (data) => {
 			});
 		}
 
-		const encrypted = PBKDF2(data.password, user.email, ENC_KEY);
+		const encrypted = crypto.PBKDF2(data.password, user.email, ENC_KEY);
 		const { password, ...userData } = user;
 		if (!password) {
 			return Response.createResponse(StatusCodes.SEE_OTHER, {
@@ -150,16 +150,19 @@ const verifyMail = async (email) => {
 	});
 };
 
-const changePasscode = async (id, newPassword) => {
-	const userData = await Queries.fetchUserById(id);
+const changePasscode = async (passcode, newPassword) => {
+	const userData = await Queries.fetchUserByPassCode(passcode);
 	if (!userData) {
 		return Response.createResponse(StatusCodes.NOT_FOUND, {
 			message: statusMessages.NOT_FOUND
 		});
 	}
 
-	const encrypted = PBKDF2(newPassword, userData.email, ENC_KEY);
-	const updatedPassword = await Queries.changePassword(id, encrypted);
+	const encrypted = crypto.PBKDF2(newPassword, userData.email, ENC_KEY);
+	const updatedPassword = await Queries.changePassword(
+		userData._id,
+		encrypted.toString()
+	);
 	if (!updatedPassword) {
 		return Response.createResponse(StatusCodes.BAD_REQUEST, {
 			message: statusMessages.BAD_REQUEST
@@ -171,6 +174,11 @@ const changePasscode = async (id, newPassword) => {
 	});
 };
 
+const updateUser = async (id, data) => {
+	// const updatedUserDetails = await Queries;
+	console.log(id, data);
+};
+
 const Services = {
 	createUser,
 	loginuser,
@@ -178,7 +186,8 @@ const Services = {
 	deleteUser,
 	fetchAllUser,
 	changePasscode,
-	verifyMail
+	verifyMail,
+	updateUser
 };
 
 export default Services;

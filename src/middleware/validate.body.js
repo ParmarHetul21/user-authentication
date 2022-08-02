@@ -69,31 +69,10 @@ const validateObjectId = (req, res, next) => {
 	}
 };
 
-const checkPasscode = (req, res, next) => {
-	try {
-		const password = req.body.password;
-		const otp = req.body.otp;
-
-		
-		if (!password) {
-			res.status(StatusCodes.BAD_REQUEST).json({
-				success: false,
-				message: "password field not found",
-				error: statusMessages.BAD_REQUEST
-			});
-		} else {
-			next();
-		}
-	} catch (error) {
-		console.log(error);
-	}
-};
-
 const middleware = {
 	checkImageExists,
 	validBody,
 	validateObjectId,
-	checkPasscode,
 	validParams
 };
 

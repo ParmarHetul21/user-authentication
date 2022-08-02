@@ -627,6 +627,66 @@
 					}
 				}
 			}
+		},
+		"/user/forgot/password": {
+			"post": {
+				"description": "forgot password API",
+				"tags": ["user"],
+				"security": [{ "bearerAuth": [] }],
+				"requestBody": {
+					"description": "forgot password body",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"password": {
+										"type": "string",
+										"nullable": false
+									},
+									"otp": {
+										"type": "number",
+										"maxLength": 4,
+										"nullable": false
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"nullable": false
+										},
+										"message": {
+											"type": "string",
+											"example": "OK"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"$ref": "#/components/responses/400"
+					},
+					"404": {
+						"$ref": "#/components/responses/404"
+					},
+					"401": {
+						"$ref": "#/components/responses/401"
+					}
+				}
+			}
 		}
 	}
 }

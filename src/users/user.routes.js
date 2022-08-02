@@ -5,8 +5,7 @@ import middleware from "../middleware/validate.body.js";
 import {
 	emailSchemas,
 	loginSchema,
-	otpSchema,
-	passwordSchema,
+	validatePassword,
 	resgiterScehma
 } from "./user.validations.js";
 import { isAuthorized } from "../middleware/auth.js";
@@ -47,10 +46,10 @@ userRouter.get(
 	handlers.verfiyEmailWithMailHandler
 );
 userRouter.post(
-	"/forgot-password",
-	middleware.validBody(passwordSchema),
-	middleware.validBody(otpSchema),
+	"/forgot/password",
+	middleware.validBody(validatePassword),
 	handlers.forgotPasswordHandler
 );
+userRouter.put("/:id/update");
 
 export default userRouter;

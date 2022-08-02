@@ -35,10 +35,19 @@ const verfiyEmailWithMailHandler = async (req, res) => {
 
 const forgotPasswordHandler = async (req, res) => {
 	const { statusCode, response } = await Services.changePasscode(
-		req.params.id,
+		req.body.otp,
 		req.body.password
 	);
+	console.log(statusCode, response);
 	return res.status(statusCode).json(response);
+};
+
+const updateUserDetails = async (req, res) => {
+	const { statusCode, response } = await Services.updateUser(
+		req.params.id,
+		req.body
+	);
+	res.status(statusCode).json(response);
 };
 
 const handlers = {
@@ -48,7 +57,8 @@ const handlers = {
 	deleteUserHandler,
 	fetchUsersHandler,
 	forgotPasswordHandler,
-	verfiyEmailWithMailHandler
+	verfiyEmailWithMailHandler,
+	updateUserDetails
 };
 
 export default handlers;

@@ -47,8 +47,7 @@ const deleteUserById = async (id) => {
 
 const fetchAllUser = async () => {
 	const allUser = await User.find().select({
-		__v: 0,
-		password: 0
+		__v: 0
 	});
 	return allUser;
 };
@@ -61,10 +60,27 @@ const changePassword = async (id, newPassword) => {
 };
 
 const updatePasscode = async (id, passcode) => {
-	const userDetails = await User.findByIdAndUpdate(id, {
+	const userDetails = await User.updateOne(
+		{ _id: id },
+		{
+			passcode: passcode
+		}
+	);
+	console.log(userDetails);
+	return userDetails;
+};
+
+const fetchUserByPassCode = async (passcode) => {
+	const userDetails = await User.findOne({
 		passcode: passcode
 	});
+
 	return userDetails;
+};
+
+const updateUserById = async (id, data) => {
+	const user = await User.findByIdAndUpdate(id, data);
+	return user;
 };
 
 const Queries = {
@@ -74,7 +90,9 @@ const Queries = {
 	deleteUserById,
 	fetchAllUser,
 	changePassword,
-	updatePasscode
+	updatePasscode,
+	fetchUserByPassCode,
+	updateUserById
 };
 
 export default Queries;
