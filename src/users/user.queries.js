@@ -7,7 +7,8 @@ const fetchUserByEmail = async (email) => {
 	try {
 		const user = User.findOne({ email: email })
 			.select({
-				__v: 0
+				__v: 0,
+				passcode: 0
 			})
 			.lean();
 		return user;
@@ -47,7 +48,8 @@ const deleteUserById = async (id) => {
 
 const fetchAllUser = async () => {
 	const allUser = await User.find().select({
-		__v: 0
+		__v: 0,
+		passcode: 0
 	});
 	return allUser;
 };

@@ -42,7 +42,7 @@ const forgotPasswordHandler = async (req, res) => {
 	return res.status(statusCode).json(response);
 };
 
-const updateUserDetails = async (req, res) => {
+const updateUserDetailsHandler = async (req, res) => {
 	const { statusCode, response } = await Services.updateUser(
 		req.params.id,
 		req.body
@@ -58,7 +58,7 @@ const handlers = {
 	fetchUsersHandler,
 	forgotPasswordHandler,
 	verfiyEmailWithMailHandler,
-	updateUserDetails
+	updateUserDetailsHandler
 };
 
 export default handlers;

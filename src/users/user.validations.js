@@ -1,7 +1,5 @@
 import Joi from "joi";
 
-const MAX_NUM = 4;
-
 export const resgiterScehma = Joi.object({
 	fullName: Joi.string().required(),
 	email: Joi.string().email().required(),
@@ -22,4 +20,10 @@ export const emailSchemas = Joi.object({
 export const validatePassword = Joi.object({
 	password: Joi.string().required(),
 	otp: Joi.number().required()
+});
+
+export const updateSchema = Joi.object({
+	fullName: Joi.string().not().empty().optional(),
+	email: Joi.string().email().not().empty().optional(),
+	gender: Joi.string().not().empty().optional()
 });

@@ -301,7 +301,7 @@
 						"$ref": "#/components/responses/404"
 					},
 					"409": {
-						"$ref": "#/components/responses/400"
+						"$ref": "#/components/responses/409"
 					}
 				}
 			}
@@ -630,7 +630,7 @@
 		},
 		"/user/forgot/password": {
 			"post": {
-				"description": "forgot password API",
+				"description": "forgot password",
 				"tags": ["user"],
 				"security": [{ "bearerAuth": [] }],
 				"requestBody": {
@@ -670,6 +670,94 @@
 										"message": {
 											"type": "string",
 											"example": "OK"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"$ref": "#/components/responses/400"
+					},
+					"404": {
+						"$ref": "#/components/responses/404"
+					},
+					"401": {
+						"$ref": "#/components/responses/401"
+					}
+				}
+			}
+		},
+		"/user/update/{userId}": {
+			"patch": {
+				"tags": ["user"],
+				"description": "update user",
+				"security": [{ "bearerAuth": [] }],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"schema": {
+							"type": "string",
+							"nullable": false
+						},
+						"required": true
+					}
+				],
+				"requestBody": {
+					"description": "update user",
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"additionalProperties": false,
+								"properties": {
+									"fullName": {
+										"type": "string",
+										"format": "string",
+										"nullable": false
+									},
+									"email": {
+										"type": "string",
+										"format": "email",
+										"nullable": false
+									},
+									"gender": {
+										"type": "string",
+										"nullable": false,
+										"format": "string"
+									},
+									"userImage": {
+										"type": "string",
+										"format": "binary",
+										"nullable": false
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "User Updated",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"default": true
+										},
+										"data": {
+											"type": "object",
+											"additionalProperties": false,
+											"properties": {
+												"message": {
+													"type": "string",
+													"description": "User Updated"
+												}
+											}
 										}
 									}
 								}

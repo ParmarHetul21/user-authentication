@@ -175,8 +175,16 @@ const changePasscode = async (passcode, newPassword) => {
 };
 
 const updateUser = async (id, data) => {
-	// const updatedUserDetails = await Queries;
-	console.log(id, data);
+	const updatedUserDetails = await Queries.updateUserById(id, data);
+	if (!updatedUserDetails) {
+		return Response.createResponse(StatusCodes.NOT_FOUND, {
+			message: statusMessages.NOT_FOUND
+		});
+	}
+
+	return Response.createResponse(StatusCodes.OK, {
+		message: statusMessages.OK
+	});
 };
 
 const Services = {

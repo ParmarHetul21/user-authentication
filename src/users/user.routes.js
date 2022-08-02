@@ -6,7 +6,8 @@ import {
 	emailSchemas,
 	loginSchema,
 	validatePassword,
-	resgiterScehma
+	resgiterScehma,
+	updateSchema
 } from "./user.validations.js";
 import { isAuthorized } from "../middleware/auth.js";
 
@@ -47,9 +48,18 @@ userRouter.get(
 );
 userRouter.post(
 	"/forgot/password",
+	isAuthorized,
 	middleware.validBody(validatePassword),
 	handlers.forgotPasswordHandler
 );
-userRouter.put("/:id/update");
+userRouter.patch(
+	"/update/:id",
+	[
+		isAuthorized,
+		[upload.single("userImage"), middleware.validateObjectId],
+		middleware.validBody(updateSchema)
+	],
+	handlers.updateUserDetailsHandler
+);
 
 export default userRouter;
