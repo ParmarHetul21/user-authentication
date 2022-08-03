@@ -39,7 +39,7 @@ userRouter.delete(
 	middleware.validateObjectId,
 	handlers.deleteUserHandler
 );
-userRouter.get("/list/all", isAuthorized, handlers.fetchUsersHandler);
+userRouter.get("/list/all", handlers.fetchUsersHandler);
 userRouter.get(
 	"/validate/:email",
 	isAuthorized,

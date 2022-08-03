@@ -12,7 +12,7 @@ const app = express();
 
 const swaggerDoc = JSON.parse(fs.readFileSync("./openapi.json", "utf8"));
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(
@@ -37,3 +37,5 @@ app.listen(PORT, () => {
 	console.log("listening on localhost:3300");
 	connection();
 });
+
+export default app;
