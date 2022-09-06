@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { USERNAME, PASSWORD } from "../config/env.js";
 
 export const sentEmail = async (email) => {
 	try {
@@ -11,8 +12,8 @@ export const sentEmail = async (email) => {
 			host: "smtp.mailtrap.io",
 			port: 2525,
 			auth: {
-				user: "3736b3c5d8818b",
-				pass: "35a699ce7fcc1d"
+				user: USERNAME,
+				pass: PASSWORD
 			}
 		});
 
